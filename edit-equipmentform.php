@@ -1,14 +1,15 @@
 <?php
 session_start();
+//the isset function to check username is already loged in and stored on the session
 if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
 ?>
-<!--->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>FitEdge+</title>
+<title>Gym System Staff A/C</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
@@ -16,8 +17,7 @@ header('location:../index.php');
 <link rel="stylesheet" href="../css/fullcalendar.css" />
 <link rel="stylesheet" href="../css/matrix-style.css" />
 <link rel="stylesheet" href="../css/matrix-media.css" />
-<link href="../font-awesome/css/fontawesome.css" rel="stylesheet" />
-<link href="../font-awesome/css/all.css" rel="stylesheet" />
+<link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link rel="stylesheet" href="../css/jquery.gritter.css" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
@@ -28,10 +28,10 @@ header('location:../index.php');
   <h1><a href="dashboard.html">FitEdge+ Gym Admin</a></h1>
 </div>
 <!--close-Header-part--> 
-<!--->
+
 
 <!--top-Header-menu-->
-<?php include 'includes/topheader.php'?>
+<?php include '../includes/header.php'?>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
 <!-- <div id="search">
@@ -39,9 +39,9 @@ header('location:../index.php');
   <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
 </div> -->
 <!--close-top-serch-->
-
 <!--sidebar-menu-->
-<?php $page='update-equip'; include 'includes/sidebar.php'?>
+<?php $page="equipment"; include '../includes/sidebar.php'?>
+
 <!--sidebar-menu-->
     <?php
         include 'dbcon.php';
@@ -50,10 +50,10 @@ header('location:../index.php');
         $result=mysqli_query($conn,$qry);
         while($row=mysqli_fetch_array($result)){
     ?> 
-<!--->
+
 <div id="content">
 <div id="content-header">
-  <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="fas fa-home"></i> Home</a> <a href="#" class="tip-bottom">Equipments</a> <a href="#" class="current">Edit Equipments</a> </div>
+  <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Equipments</a> <a href="#" class="current">Edit Equipments</a> </div>
   <h1>Equipment Entry Form</h1>
 </div>
 <div class="container-fluid">
@@ -61,7 +61,7 @@ header('location:../index.php');
   <div class="row-fluid">
     <div class="span6">
       <div class="widget-box">
-        <div class="widget-title"> <span class="icon"> <i class="fas fa-align-justify"></i> </span>
+        <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
           <h5>Eqipment-info</h5>
         </div>
         <div class="widget-content nopadding">
@@ -122,7 +122,7 @@ header('location:../index.php');
     
     <div class="span6">
       <div class="widget-box">
-        <div class="widget-title"> <span class="icon"> <i class="fas fa-align-justify"></i> </span>
+        <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
           <h5>Other Details</h5>
         </div>
         <div class="widget-content nopadding">
@@ -149,7 +149,7 @@ header('location:../index.php');
             </div>
           </div>
 
-              <div class="widget-title"> <span class="icon"> <i class="fas fa-align-justify"></i> </span>
+              <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
           <h5>Pricing</h5>
         </div>
         <div class="widget-content nopadding">
@@ -167,7 +167,7 @@ header('location:../index.php');
                   </div>
               </div>
             </div>
-            <!--->
+            
           
             
             <div class="form-actions text-center">
@@ -193,6 +193,7 @@ header('location:../index.php');
   </div>
   
   
+  </div>
 </div></div>
 
 
@@ -204,8 +205,12 @@ header('location:../index.php');
   <div id="footer" class="span12"> <?php echo date("Y");?> &copy; Project by Rohit Pokharkar</a> </div>
 </div>
 
+<style>
+#footer {
+  color: white;
+}
+</style>
 
-<!--->
 <!--end-Footer-part-->
 
 <script src="../js/excanvas.min.js"></script> 

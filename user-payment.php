@@ -1,5 +1,7 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
+require_once '../../dbcon.php'; // Adjust path if needed
+
 // Include Razorpay SDK
 include "dbcon.php";
 use Razorpay\Api\Api;

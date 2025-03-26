@@ -1,8 +1,7 @@
 <?php
 session_start();
 include "dbcon.php"; // Database connection file
-require '../vendor/autoload.php'; // Razorpay SDK
-
+require __DIR__ . '/../../vendor/autoload.php';
 use Razorpay\Api\Api;
 
 $api_key = "rzp_test_HUMgepG80fd2Ck";  // Replace with your Razorpay API Key

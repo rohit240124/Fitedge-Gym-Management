@@ -7,11 +7,11 @@ if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
 ?>
-<!--->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>FitEdge+</title>
+<title>Gym System</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
@@ -19,8 +19,7 @@ header('location:../index.php');
 <link rel="stylesheet" href="../css/fullcalendar.css" />
 <link rel="stylesheet" href="../css/matrix-style.css" />
 <link rel="stylesheet" href="../css/matrix-media.css" />
-<link href="../font-awesome/css/fontawesome.css" rel="stylesheet" />
-<link href="../font-awesome/css/all.css" rel="stylesheet" />
+<link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link rel="stylesheet" href="../css/jquery.gritter.css" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
@@ -28,13 +27,13 @@ header('location:../index.php');
 
 <!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.html">FitEdge+ Gym Admin</a></h1>
+  <h1><a href="dashboard.php">Perfect Gym</a></h1>
 </div>
 <!--close-Header-part--> 
 
-<!--->
+
 <!--top-Header-menu-->
-<?php include 'includes/topheader.php'?>
+<?php include '../includes/header.php'?>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
 <!-- <div id="search">
@@ -44,12 +43,12 @@ header('location:../index.php');
 <!--close-top-serch-->
 
 <!--sidebar-menu-->
-<?php $page='payment'; include 'includes/sidebar.php'?>
+<?php $page='payment'; include '../includes/sidebar.php'?>
 <!--sidebar-menu-->
 
 <div id="content">
 <div id="content-header">
-  <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="fas fa-home"></i> Home</a> <a href="payment.php" class="tip-bottom">Payment</a> <a href="#" class="current">Make Payments</a> </div>
+  <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="payment.php" class="tip-bottom">Payment</a> <a href="#" class="current">Make Payments</a> </div>
   <h1>Payments</h1>
 </div>
 <form role="form" action="index.php" method="POST">
@@ -59,13 +58,11 @@ header('location:../index.php');
 
             $fullname = $_POST['fullname'];
             $paid_date = $_POST['paid_date'];
-            // $p_year = date('Y');
             $services = $_POST["services"];
             $amount = $_POST["amount"];
             $plan = $_POST["plan"];
             $status = $_POST["status"];
             $id=$_POST['id'];
-            
 
             $amountpayable = $amount * $plan;
             
@@ -78,7 +75,7 @@ header('location:../index.php');
                 $curr_time =  $exp_date_time['1']. ' ' .$exp_date_time['2'];
             //code after connection is successfull
             //update query
-            $qry = "UPDATE members SET amount='$amountpayable', plan='$plan', status='$status', paid_date='$curr_date', reminder='0' WHERE user_id='$id'";
+            $qry = "UPDATE members SET amount='$amountpayable', plan='$plan', status='$status', paid_date='$curr_date', reminder = '0' WHERE user_id='$id'";
             $result = mysqli_query($conn,$qry); //query executes
 
             if(!$result){ ?>
@@ -163,7 +160,7 @@ header('location:../index.php');
                             <div class="footer">
                                 <table width="100%">
                                     <tbody><tr>
-                                        <td class="aligncenter content-block"><button class="btn btn-danger" onclick="window.print()"><i class="fas fa-print"></i> Print</button></td>
+                                        <td class="aligncenter content-block"><button class="btn btn-danger" onclick="window.print()"><i class="icon icon-print"></i> Print</button></td>
                                     </tr>
                                 </tbody></table>
                             </div></div>
@@ -201,7 +198,7 @@ header('location:../index.php');
 <!--Footer-part-->
 
 <div class="row-fluid">
-  <div id="footer" class="span12"> <?php echo date("Y");?> &copy; Project by Rohit Pokharkar </a> </div>
+  <div id="footer" class="span12"> <?php echo date("Y");?> &copy; Project by Rohit Pokharkar</a> </div>
 </div>
 
 <style>

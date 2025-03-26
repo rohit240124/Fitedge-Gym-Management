@@ -5,42 +5,48 @@ if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
 ?>
-<!--->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>FitEdge+</title>
+<title>Gym System Staff A/C</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
 <link rel="stylesheet" href="../css/bootstrap-responsive.min.css" />
+<link rel="stylesheet" href="../css/fullcalendar.css" />
 <link rel="stylesheet" href="../css/matrix-style.css" />
 <link rel="stylesheet" href="../css/matrix-media.css" />
-<link href="../font-awesome/css/fontawesome.css" rel="stylesheet" />
-<link href="../font-awesome/css/all.css" rel="stylesheet" />
+<link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link rel="stylesheet" href="../css/jquery.gritter.css" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
 <!--Header-part-->
 <div id="header">
-  <h1><a href="">FitEdge+ Gym Admin</a></h1>
+  <h1><a href="dashboard.html">FitEdge+ Gym Admin</a></h1>
 </div>
 <!--close-Header-part--> 
 
 
 <!--top-Header-menu-->
-<?php include 'includes/topheader.php'?>
-
-
+<?php include '../includes/header.php'?>
+<!--close-top-Header-menu-->
+<!--start-top-serch-->
+<!-- <div id="search">
+  <input type="hidden" placeholder="Search here..."/>
+  <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
+</div> -->
+<!--close-top-serch-->
 <!--sidebar-menu-->
-<?php $page='payment'; include 'includes/sidebar.php'?>
+<?php $page="payment"; include '../includes/sidebar.php'?>
 <!--sidebar-menu-->
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="fas fa-home"></i> Home</a> <a href="payment.php">Payments</a> <a href="#" class="current">Search Results</a> </div>
-    <h1 class="text-center">Registered Member's Payment <i class="fas fa-group"></i></h1>
+    <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="payment.php">Payments</a> <a href="#" class="current">Search Results</a> </div>
+    <h1 class="text-center">Registered Member's Payment <i class="icon icon-group"></i></h1>
   </div>
   <div class="container-fluid">
     <hr>
@@ -48,12 +54,12 @@ header('location:../index.php');
       <div class="span12">
 
       <div class='widget-box'>
-          <div class='widget-title'> <span class='icon'> <i class='fas fa-th'></i> </span>
+          <div class='widget-title'> <span class='icon'> <i class='icon-th'></i> </span>
             <h5>Member's Payment table</h5>
             <form id="custom-search-form" role="search" method="POST" action="search-result.php" class="form-search form-horizontal pull-right">
                 <div class="input-append span12">
                     <input type="text" class="search-query" placeholder="Search" name="search" required>
-                    <button type="submit" class="btn"><i class="fas fa-search"></i></button>
+                    <button type="submit" class="btn"><i class="icon-search"></i></button>
                 </div>
             </form>
           </div>
@@ -64,9 +70,9 @@ header('location:../index.php');
 
       include "dbcon.php";
       $search=$_POST['search'];
-      $qry="select * from members where fullname like '%$search%' or username like '%$search%'";
       $cnt = 1;
-        $result=mysqli_query($con,$qry);
+      $qry="select * from members where fullname like '%$search%' or username like '%$search%'";
+        $result=mysqli_query($conn,$qry);
 
         if (mysqli_num_rows($result)==0){
 
@@ -77,7 +83,7 @@ header('location:../index.php');
             <a class='btn btn-danger btn-big'  href='payment.php'>Go Back</a> </div>'";
         }else{
 
-        echo"<table class='table table-bordered table-hover'>
+        echo"<table class='table table-bordered table-striped'>
         <thead>
           <tr>
             <th>#</th>
@@ -103,11 +109,11 @@ header('location:../index.php');
                 <td><div class='text-center'>₹".$row['amount']."</div></td>
                 <td><div class='text-center'>".$row['services']."</div></td>
                 <td><div class='text-center'>".$row['plan']." Days</div></td>
-                <td><div class='text-center'><a href='user-payment.php?id=".$row['user_id']."'><button class='btn btn-success btn'><i class='fas fa-rupee-sign'></i> Make Payment</button></a></div></td>
+                <td><div class='text-center'><a href='user-payment.php?id=".$row['user_id']."'><button class='btn btn-success btn-mini'><i class='icon icon-money'></i> Make Payment</button></a></div></td>
                 
               </tbody>";
               $cnt++;   }
-       }
+      }
             ?>
 
             </table>
@@ -122,11 +128,11 @@ header('location:../index.php');
 </div>
 
 <!--end-main-container-part-->
-<!--->
+
 <!--Footer-part-->
 
 <div class="row-fluid">
-  <div id="footer" class="span12"> <?php echo date("Y");?> &copy;  Project by Rohit Pokharkar</a> </div>
+  <div id="footer" class="span12"> <?php echo date("Y");?> &copy; Project by Rohit Pokharkar</a> </div>
 </div>
 
 <style>

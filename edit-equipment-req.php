@@ -1,14 +1,15 @@
 <?php
-  session_start();
-    if(!isset($_SESSION['user_id'])) {
-      header('location:../index.php');	
-    }
+session_start();
+//the isset function to check username is already loged in and stored on the session
+if(!isset($_SESSION['user_id'])){
+header('location:../index.php');	
+}
 ?>
-<!--->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>FitEdge+</title>
+<title>Gym System Staff A/C</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
@@ -16,8 +17,7 @@
 <link rel="stylesheet" href="../css/fullcalendar.css" />
 <link rel="stylesheet" href="../css/matrix-style.css" />
 <link rel="stylesheet" href="../css/matrix-media.css" />
-<link href="../font-awesome/css/fontawesome.css" rel="stylesheet" />
-<link href="../font-awesome/css/all.css" rel="stylesheet" />
+<link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link rel="stylesheet" href="../css/jquery.gritter.css" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
@@ -25,13 +25,14 @@
 
 <!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.html">FitEdge+ Gym Admin</a></h1>
+  <h1><a href="dashboard.html">Perfect Gym Staff A/C</a></h1>
 </div>
 <!--close-Header-part--> 
 
 
 <!--top-Header-menu-->
-<?php include 'includes/topheader.php'?>
+<?php include '../includes/header.php'?>
+
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
 <!-- <div id="search">
@@ -39,15 +40,15 @@
   <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
 </div> -->
 <!--close-top-serch-->
-<!--->
 <!--sidebar-menu-->
-<?php $page='update-equip'; include 'includes/sidebar.php'?>
+
+<?php $page="equipment"; include '../includes/sidebar.php'?>
 
 
 <!--sidebar-menu-->
 <div id="content">
 <div id="content-header">
-  <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="fas fa-home"></i> Home</a> <a href="#" class="tip-bottom">Manamge Equipments</a> <a href="#" class="current">Update Equipment</a> </div>
+  <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Manage Equipments</a> <a href="#" class="current">Update Equipment</a> </div>
   <h1>Update Equipment</h1>
 </div>
 <form role="form" action="index.php" method="POST">
@@ -63,13 +64,11 @@
             $date = $_POST["date"];
             $quantity = $_POST["quantity"];
             $id=$_POST['id'];
-
-            $totalamount = $amount * $quantity;
             
             include 'dbcon.php';
             //code after connection is successfull
             //update query
-            $qry = "update equipment set name='$name', amount='$totalamount',vendor='$vendor', description='$description', address='$address', address='$address', contact='$contact', date='$date', quantity='$quantity' where id='$id'";
+            $qry = "update equipment set name='$name', amount='$amount',vendor='$vendor', description='$description', address='$address', address='$address', contact='$contact', date='$date', quantity='$quantity' where id='$id'";
             $result = mysqli_query($conn,$qry); //query executes
 
             if(!$result){
@@ -77,7 +76,7 @@
                     echo"<div class='row-fluid'>";
                     echo"<div class='span12'>";
                     echo"<div class='widget-box'>";
-                    echo"<div class='widget-title'> <span class='icon'> <i class='fas fa-info'></i> </span>";
+                    echo"<div class='widget-title'> <span class='icon'> <i class='icon-info-sign'></i> </span>";
                         echo"<h5>Error Message</h5>";
                         echo"</div>";
                         echo"<div class='widget-content'>";
@@ -97,7 +96,7 @@
                     echo"<div class='row-fluid'>";
                     echo"<div class='span12'>";
                     echo"<div class='widget-box'>";
-                    echo"<div class='widget-title'> <span class='icon'> <i class='fas fa-info'></i> </span>";
+                    echo"<div class='widget-title'> <span class='icon'> <i class='icon-info-sign'></i> </span>";
                         echo"<h5>Message</h5>";
                         echo"</div>";
                         echo"<div class='widget-content'>";
@@ -111,7 +110,7 @@
                     echo"</div>";
                     echo"</div>";
                 echo"</div>";
-                // <!--->
+
             }
 
             }else{
@@ -126,7 +125,7 @@
 </div>
 
 <!--end-main-container-part-->
-<!--->
+
 <!--Footer-part-->
 
 <div class="row-fluid">

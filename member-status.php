@@ -5,11 +5,11 @@ if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
 ?>
-<!--->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>FitEdge+</title>
+<title>Gym System</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
@@ -17,8 +17,7 @@ header('location:../index.php');
 <link rel="stylesheet" href="../css/fullcalendar.css" />
 <link rel="stylesheet" href="../css/matrix-style.css" />
 <link rel="stylesheet" href="../css/matrix-media.css" />
-<link href="../font-awesome/css/fontawesome.css" rel="stylesheet" />
-<link href="../font-awesome/css/all.css" rel="stylesheet" />
+<link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link rel="stylesheet" href="../css/jquery.gritter.css" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
@@ -26,13 +25,13 @@ header('location:../index.php');
 
 <!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.html">FitEdge+ Gym Admin</a></h1>
+  <h1><a href="dashboard.html">Perfect Gym</a></h1>
 </div>
 <!--close-Header-part--> 
 
-<!--->
+
 <!--top-Header-menu-->
-<?php include 'includes/topheader.php'?>
+<?php include '../includes/header.php'?>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
 <!-- <div id="search">
@@ -41,23 +40,20 @@ header('location:../index.php');
 </div> -->
 <!--close-top-serch-->
 
-<!--sidebar-menu-->
-<?php $page='member-status'; include 'includes/sidebar.php'?>
-<!--sidebar-menu-->
+<?php $page="membersts"; include '../includes/sidebar.php'?>
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="fas fa-home"></i> Home</a> <a href="member-status.php" class="current">Status</a> </div>
-    <h1 class="text-center">Member's Current Status <i class="fas fa-eye"></i></h1>
+    <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="member-status.php" class="current">Status</a> </div>
+    <h1 class="text-center">Member's Current Status <i class="icon icon-eye-open"></i></h1>
   </div>
   <div class="container-fluid">
     <hr>
     <div class="row-fluid">
       <div class="span12">
-      
+
       <div class='widget-box'>
-      
-          <div class='widget-title'> <span class='icon'> <i class='fas fa-th'></i> </span>
+          <div class='widget-title'> <span class='icon'> <i class='icon-th'></i> </span>
             <h5>Status table</h5>
           </div>
           <div class='widget-content nopadding'>
@@ -65,12 +61,12 @@ header('location:../index.php');
 	  <?php
 
       include "dbcon.php";
-      $qry="SELECT * FROM members";
-      $cnt = 1;
+      $qry="select * from members";
+      $cnt =1;
         $result=mysqli_query($conn,$qry);
 
         
-          echo"<table class='table table-bordered table-hover data-table'>
+          echo"<table class='table table-bordered table-striped'>
               <thead>
                 <tr>
                   <th>#</th>
@@ -82,20 +78,18 @@ header('location:../index.php');
                 </tr>
               </thead>";
               
-            while($row=mysqli_fetch_array($result)){?>
+            while($row=mysqli_fetch_array($result)){ ?>
             
            <tbody> 
                
-                <td><div class='text-center'><?php echo $cnt;?></div></td>
+               <td><div class='text-center'><?php echo $cnt;?></div></td>
                 <td><div class='text-center'><?php echo $row['fullname'];?></div></td>
                 <td><div class='text-center'><?php echo $row['contact'];?></div></td>
                 <td><div class='text-center'><?php echo $row['services'];?></div></td>
-                <td><div class='text-center'><?php echo $row['plan'];?> Month/s</div></td>
-                <td><div class='text-center'><?php if( $row['status'] == 'Active' ){ echo '<i class="fas fa-circle" style="color:green;"></i> Active';} else if ($row['status'] == 'Expired') { echo '<i class="fas fa-circle" style="color:red;"></i> Expired';} else { echo '<i class="fas fa-circle" style="color:orange;"></i> Pending Reg';}?></div></td>
-                
+                <td><div class='text-center'><?php echo $row['plan'];?> Days</div></td>
+                <td><div class='text-center'><?php if( $row['status'] == 'Active' ){ echo '<i class="icon icon-circle" style="color:green;"></i> Active';} else { echo '<i class="icon icon-circle" style="color:red;"></i> Expired';}?></div></td>
               </tbody>
-          <?php
-     $cnt++;      }
+              <?php $cnt++;  }
             ?>
 
             </table>
@@ -122,6 +116,7 @@ header('location:../index.php');
   color: white;
 }
 </style>
+
 <!--end-Footer-part-->
 
 <script src="../js/excanvas.min.js"></script> 
@@ -145,7 +140,6 @@ header('location:../index.php');
 <script src="../js/matrix.popover.js"></script> 
 <script src="../js/jquery.dataTables.min.js"></script> 
 <script src="../js/matrix.tables.js"></script> 
-
 
 <script type="text/javascript">
   // This function is called from the pop-up menus to transfer to

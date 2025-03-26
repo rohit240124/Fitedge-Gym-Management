@@ -9,7 +9,7 @@ header('location:../index.php');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>FitEdge+</title>
+<title>Gym System</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
@@ -17,22 +17,21 @@ header('location:../index.php');
 <link rel="stylesheet" href="../css/fullcalendar.css" />
 <link rel="stylesheet" href="../css/matrix-style.css" />
 <link rel="stylesheet" href="../css/matrix-media.css" />
-<link href="../font-awesome/css/fontawesome.css" rel="stylesheet" />
-<link href="../font-awesome/css/all.css" rel="stylesheet" />
+<link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link rel="stylesheet" href="../css/jquery.gritter.css" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
-
+<!--->
 <!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.html">FitEdge+ Gym Admin</a></h1>
+  <h1><a href="dashboard.html">Perfect Gym</a></h1>
 </div>
 <!--close-Header-part--> 
 
 
 <!--top-Header-menu-->
-<?php include 'includes/topheader.php'?>
+<?php include '../includes/header.php'?>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
 <!-- <div id="search">
@@ -40,15 +39,16 @@ header('location:../index.php');
   <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
 </div> -->
 <!--close-top-serch-->
-<!--->
 <!--sidebar-menu-->
-<?php $page='members-update'; include 'includes/sidebar.php'?>
+
+<?php $page="member"; include '../includes/sidebar.php'?>
+
 <!--sidebar-menu-->
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="fas fa--home"></i> Home</a> <a href="#" class="current">Registered Members</a> </div>
-    <h1 class="text-center">Registered Members List <i class="fas fa-group"></i></h1>
+    <div id="breadcrumb"> <a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="current">Registered Members</a> </div>
+    <h1 class="text-center">Registered Members List <i class="icon icon-group"></i></h1>
   </div>
   <div class="container-fluid">
     <hr>
@@ -56,7 +56,7 @@ header('location:../index.php');
       <div class="span12">
 
       <div class='widget-box'>
-          <div class='widget-title'> <span class='icon'> <i class='fas fa-th'></i> </span>
+          <div class='widget-title'> <span class='icon'> <i class='icon-th'></i> </span>
             <h5>Member table</h5>
           </div>
           <div class='widget-content nopadding'>
@@ -69,7 +69,7 @@ header('location:../index.php');
         $result=mysqli_query($conn,$qry);
 
         
-          echo"<table class='table table-bordered table-hover'>
+          echo"<table class='table table-bordered table-striped'>
               <thead>
                 <tr>
                   <th>#</th>
@@ -85,7 +85,7 @@ header('location:../index.php');
                   <th>Action</th>
                 </tr>
               </thead>";
-              // <!--->
+              
             while($row=mysqli_fetch_array($result)){
             
             echo"<tbody> 
@@ -99,8 +99,8 @@ header('location:../index.php');
                 <td><div class='text-center'>".$row['address']."</div></td>
                 <td><div class='text-center'>₹".$row['amount']."</div></td>
                 <td><div class='text-center'>".$row['services']."</div></td>
-                <td><div class='text-center'>".$row['plan']." Month/s</div></td>
-                <td><div class='text-center'><a href='edit-memberform.php?id=".$row['user_id']."'><i class='fas fa-edit'></i> Edit</a></div></td>
+                <td><div class='text-center'>".$row['plan']." Days</div></td>
+                <td><div class='text-center'><a href='edit-memberform.php?id=".$row['user_id']."'><i class='icon icon-pencil'></i> Edit</a></div></td>
                 
               </tbody>";
          $cnt++;   }
@@ -120,7 +120,7 @@ header('location:../index.php');
 <!--end-main-container-part-->
 
 <!--Footer-part-->
-<!--->
+
 <div class="row-fluid">
   <div id="footer" class="span12"> <?php echo date("Y");?> &copy; Project by Rohit Pokharkar</a> </div>
 </div>

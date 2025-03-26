@@ -1,15 +1,17 @@
 <?php
 
+
 session_start();
+//the isset function to check username is already loged in and stored on the session
 if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
 ?>
-<!--->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>FitEdge+</title>
+<title>Gym System</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
@@ -17,38 +19,37 @@ header('location:../index.php');
 <link rel="stylesheet" href="../css/fullcalendar.css" />
 <link rel="stylesheet" href="../css/matrix-style.css" />
 <link rel="stylesheet" href="../css/matrix-media.css" />
-<link href="../font-awesome/css/fontawesome.css" rel="stylesheet" />
-<link href="../font-awesome/css/all.css" rel="stylesheet" />
+<link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link rel="stylesheet" href="../css/jquery.gritter.css" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
-<!--Header-part--><!--->
+<!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.html">FitEdge+ Gym Admin</a></h1>
+  <h1><a href="dashboard.html">Perfect Gym</a></h1>
 </div>
 <!--close-Header-part--> 
 
 
-<!--top-Header-menu--><!--->
-<?php include 'includes/topheader.php'?>
+<!--top-Header-menu-->
+<?php include '../includes/header.php'?>
 <!--close-top-Header-menu-->
+
 <!--start-top-serch-->
 <!-- <div id="search">
   <input type="hidden" placeholder="Search here..."/>
   <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
 </div> -->
 <!--close-top-serch-->
-
 <!--sidebar-menu-->
-<?php $page='payment'; include 'includes/sidebar.php'?>
+<?php $page="payment"; include '../includes/sidebar.php'?>
 <!--sidebar-menu-->
 
 <div id="content">
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="fas fa-home"></i> Home</a> <a href="payment.php" class="current">Payments</a> </div>
-    <h1 class="text-center">Registered Member's Payment <i class="fas fa-group"></i></h1>
+    <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="payment.php" class="current">Payments</a> </div>
+    <h1 class="text-center">Registered Member's Payment <i class="icon icon-group"></i></h1>
   </div>
   <div class="container-fluid">
     <hr>
@@ -56,67 +57,56 @@ header('location:../index.php');
       <div class="span12">
 
       <div class='widget-box'>
-          <div class='widget-title'> <span class='icon'> <i class='fas fa-th'></i> </span>
+          <div class='widget-title'> <span class='icon'> <i class='icon-th'></i> </span>
             <h5>Member's Payment table</h5>
             <form id="custom-search-form" role="search" method="POST" action="search-result.php" class="form-search form-horizontal pull-right">
                 <div class="input-append span12">
                     <input type="text" class="search-query" placeholder="Search" name="search" required>
-                    <button type="submit" class="btn"><i class="fas fa-search"></i></button>
+                    <button type="submit" class="btn"><i class="icon-search"></i></button>
                 </div>
             </form>
           </div>
-          
           <div class='widget-content nopadding'>
-
-
-
-           <!-- <form action="search-result.php" role="search" method="POST">
-            <div id="search">
-            <input type="text" placeholder="Search Here.." name="search"/>
-            <button type="submit" class="tip-bottom" title="Search"><i class="fas fa-search fa-white"></i></button>
-          </div>
-          </form> -->
-
 	  
-	  <?php
+          <?php
 
-      include "dbcon.php";
-      $qry="SELECT * FROM members";
-      $cnt = 1;
-        $result=mysqli_query($conn,$qry);
+include "dbcon.php";
+$qry="SELECT * FROM members";
+$cnt = 1;
+  $result=mysqli_query($conn,$qry);
 
+  
+    echo"<table class='table table-bordered data-table table-hover'>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Fullname</th>
+            <th>Last Payment Date</th>
+            <th>Amount</th>
+            <th>Choosen Service</th>
+            <th>Plan</th>
+            <th>Action</th>
+            <th>Remind</th>
+          </tr>
+        </thead>";
         
-          echo"<table class='table table-bordered data-table table-hover'>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Member</th>
-                  <th>Last Payment Date</th>
-                  <th>Amount</th>
-                  <th>Choosen Service</th>
-                  <th>Plan</th>
-                  <th>Action</th>
-                  <th>Remind</th>
-                </tr>
-              </thead>";
-              
-            while($row=mysqli_fetch_array($result)){ ?>
-            
-            <tbody> 
-               
-                <td><div class='text-center'><?php echo $cnt;?></div></td>
-                <td><div class='text-center'><?php echo $row['fullname']?></div></td>
-                <td><div class='text-center'><?php echo($row['paid_date'] == 0 ? "New Member" : $row['paid_date'])?></div></td>
-                
-                <td><div class='text-center'><?php echo '₹'.$row['amount']?></div></td>
-                <td><div class='text-center'><?php echo $row['services']?></div></td>
-                <td><div class='text-center'><?php echo $row['plan']." Month/s"?></div></td>
-                <td><div class='text-center'><a href='user-payment.php?id=<?php echo $row['user_id']?>'><button class='btn btn-success btn'><i class='fas fa-rupee-sign'></i> Make Payment</button></a></div></td>
-                <td><div class='text-center'><a href='sendReminder.php?id=<?php echo $row['user_id']?>'><button class='btn btn-danger btn' <?php echo($row['reminder'] == 1 ? "disabled" : "")?>>Alert</button></a></div></td>
-              </tbody>
-          <?php $cnt++; }
+      while($row=mysqli_fetch_array($result)){ ?>
+      
+      <tbody> 
+         
+          <td><div class='text-center'><?php echo $cnt;?></div></td>
+          <td><div class='text-center'><?php echo $row['fullname']?></div></td>
+          <td><div class='text-center'><?php echo($row['paid_date'] == 0 ? "New Member" : $row['paid_date'])?></div></td>
+          
+          <td><div class='text-center'><?php echo '₹'.$row['amount']?></div></td>
+          <td><div class='text-center'><?php echo $row['services']?></div></td>
+          <td><div class='text-center'><?php echo $row['plan']." Month/s"?></div></td>
+          <td><div class='text-center'><a href='user-payment.php?id=<?php echo $row['user_id']?>'><button class='btn btn-success btn'><i class='icon icon-money'></i> Make Payment</button></a></div></td>
+          <td><div class='text-center'><a href='sendReminder.php?id=<?php echo $row['user_id']?>'><button class='btn btn-danger btn' <?php echo($row['reminder'] == 1 ? "disabled" : "")?>>Alert</button></a></div></td>
+        </tbody>
+    <?php $cnt++; }
 
-            ?>
+      ?>
 
             </table>
           </div>
@@ -133,14 +123,16 @@ header('location:../index.php');
 
 <!--Footer-part-->
 
-
-
+<div class="row-fluid">
+  <div id="footer" class="span12"> <?php echo date("Y");?> &copy; Project by Rohit Pokharkar</a> </div>
+</div>
 
 <style>
 #footer {
   color: white;
 }
 </style>
+
 <!--end-Footer-part-->
 
 <style>
@@ -182,7 +174,6 @@ header('location:../index.php');
         z-index: 3;   
     }
 </style>
-
 
 <script src="../js/excanvas.min.js"></script> 
 <script src="../js/jquery.min.js"></script> 

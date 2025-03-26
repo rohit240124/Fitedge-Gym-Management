@@ -1,5 +1,6 @@
 <?php
 session_start();
+//the isset function to check username is already loged in and stored on the session
 if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
@@ -8,7 +9,7 @@ header('location:../index.php');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>FitEdge</title>
+<title>Gym System</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
@@ -16,8 +17,7 @@ header('location:../index.php');
 <link rel="stylesheet" href="../css/fullcalendar.css" />
 <link rel="stylesheet" href="../css/matrix-style.css" />
 <link rel="stylesheet" href="../css/matrix-media.css" />
-<link href="../font-awesome/css/fontawesome.css" rel="stylesheet" />
-<link href="../font-awesome/css/all.css" rel="stylesheet" />
+<link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link rel="stylesheet" href="../css/jquery.gritter.css" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
@@ -25,36 +25,33 @@ header('location:../index.php');
 
 <!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.html">FitEdge+ Gym Admin</a></h1>
+  <h1><a href="dashboard.html">Perfect Gym</a></h1>
 </div>
 <!--close-Header-part--> 
-<!--->
+
 
 <!--top-Header-menu-->
-<?php include 'includes/topheader.php'?>
+<?php include '../includes/header.php'?>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
 <!-- <div id="search">
   <input type="hidden" placeholder="Search here..."/>
-  <button type="submit" class="tip-bottom" title="Search"><i class="fa-search fa-white"></i></button>
+  <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
 </div> -->
 <!--close-top-serch-->
 
-<!--sidebar-menu-->
-<?php $page='add-equip'; include 'includes/sidebar.php'?>
+<?php $page="equipment"; include '../includes/sidebar.php'?>
 
-
-<!--sidebar-menu-->
 <div id="content">
 <div id="content-header">
-  <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a> <a href="#" class="tip-bottom">Manamge Members</a> <a href="#" class="current">Add Members</a> </div>
+  <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Manamge Members</a> <a href="#" class="current">Add Members</a> </div>
   <h1>Equipment Entry Form</h1>
 </div>
 <form role="form" action="index.php" method="POST">
             <?php 
 
-if(isset($_POST['ename'])){
-$name = $_POST["ename"];    
+if(isset($_POST['name'])){
+$name = $_POST["name"];    
 $amount = $_POST["amount"];
 $vendor = $_POST["vendor"];
 $description = $_POST["description"];
@@ -63,11 +60,9 @@ $quantity = $_POST["quantity"];
 $address = $_POST["address"];
 $contact = $_POST["contact"];
 
-$totalamount = $amount * $quantity;
-
 include 'dbcon.php';
 //code after connection is successfull
-$qry = "insert into equipment(name,description,amount,vendor,address,contact,date,quantity) values ('$name','$description','$totalamount','$vendor','$address','$contact','$date','$quantity')";
+$qry = "insert into equipment(name,description,amount,vendor,address,contact,date,quantity) values ('$name','$description','$amount','$vendor','$address','$contact','$date','$quantity')";
 $result = mysqli_query($conn,$qry); //query executes
 
 if(!$result){
@@ -75,7 +70,7 @@ if(!$result){
       echo"<div class='row-fluid'>";
       echo"<div class='span12'>";
       echo"<div class='widget-box'>";
-      echo"<div class='widget-title'> <span class='icon'> <i class='fas fa-info'></i> </span>";
+      echo"<div class='widget-title'> <span class='icon'> <i class='icon-info-sign'></i> </span>";
           echo"<h5>Error Message</h5>";
           echo"</div>";
           echo"<div class='widget-content'>";
@@ -95,7 +90,7 @@ if(!$result){
       echo"<div class='row-fluid'>";
       echo"<div class='span12'>";
       echo"<div class='widget-box'>";
-      echo"<div class='widget-title'> <span class='icon'> <i class='fas fa-info'></i> </span>";
+      echo"<div class='widget-title'> <span class='icon'> <i class='icon-info-sign'></i> </span>";
           echo"<h5>Message</h5>";
           echo"</div>";
           echo"<div class='widget-content'>";
@@ -119,7 +114,7 @@ if(!$result){
 
 ?>
                                     
-      <!--->                          
+                                
                                         
                 
                                     </form>
@@ -142,7 +137,7 @@ if(!$result){
 </style>
 
 <!--end-Footer-part-->
-<!--->
+
 <script src="../js/excanvas.min.js"></script> 
 <script src="../js/jquery.min.js"></script> 
 <script src="../js/jquery.ui.custom.js"></script> 

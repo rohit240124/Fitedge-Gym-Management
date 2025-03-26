@@ -5,11 +5,11 @@ if(!isset($_SESSION['user_id'])){
 header('location:../index.php');	
 }
 ?>
-<!--->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>FitEdge+</title>
+<title>Gym System</title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
@@ -17,22 +17,21 @@ header('location:../index.php');
 <link rel="stylesheet" href="../css/fullcalendar.css" />
 <link rel="stylesheet" href="../css/matrix-style.css" />
 <link rel="stylesheet" href="../css/matrix-media.css" />
-<link href="../font-awesome/css/fontawesome.css" rel="stylesheet" />
-<link href="../font-awesome/css/all.css" rel="stylesheet" />
+<link href="../font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link rel="stylesheet" href="../css/jquery.gritter.css" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
-<!--Header-part--><!--->
+<!--Header-part-->
 <div id="header">
-  <h1><a href="dashboard.html">FitEdge+ Gym Admin</a></h1>
+  <h1><a href="dashboard.html">Perfect Gym</a></h1>
 </div>
 <!--close-Header-part--> 
 
 
 <!--top-Header-menu-->
-<?php include 'includes/topheader.php'?>
+<?php include '../includes/header.php'?>
 <!--close-top-Header-menu-->
 <!--start-top-serch-->
 <!-- <div id="search">
@@ -40,13 +39,12 @@ header('location:../index.php');
   <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
 </div> -->
 <!--close-top-serch-->
-
 <!--sidebar-menu-->
-<?php $page='members-entry'; include 'includes/sidebar.php'?>
+<?php $page="member"; include '../includes/sidebar.php'?>
 <!--sidebar-menu-->
 <div id="content">
 <div id="content-header">
-  <div id="breadcrumb"> <a href="index.php" title="Go to Home" class="tip-bottom"><i class="fas fa-home"></i> Home</a> <a href="#" class="tip-bottom">Manamge Members</a> <a href="#" class="current">Add Members</a> </div>
+  <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="#" class="tip-bottom">Manamge Members</a> <a href="#" class="current">Add Members</a> </div>
   <h1>Member Entry Form</h1>
 </div>
 <div class="container-fluid">
@@ -54,7 +52,7 @@ header('location:../index.php');
   <div class="row-fluid">
     <div class="span6">
       <div class="widget-box">
-        <div class="widget-title"> <span class="icon"> <i class="fas fa-align-justify"></i> </span>
+        <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
           <h5>Personal-info</h5>
         </div>
         <div class="widget-content nopadding">
@@ -62,7 +60,7 @@ header('location:../index.php');
             <div class="control-group">
               <label class="control-label">Full Name :</label>
               <div class="controls">
-                <input type="text" class="span11" name="fullname" placeholder="Fullname" />
+                <input type="text" class="span11" name="fullname" placeholder="First name" />
               </div>
             </div>
             <div class="control-group">
@@ -81,11 +79,7 @@ header('location:../index.php');
             <div class="control-group">
               <label class="control-label">Gender :</label>
               <div class="controls">
-              <select name="gender" required="required" id="select">
-                  <option value="Male" selected="selected">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                </select>
+                <input type="text" class="span11" name="gender" placeholder="Male or Female" />
               </div>
             </div>
             <div class="control-group">
@@ -109,10 +103,10 @@ header('location:../index.php');
               <label for="normal" class="control-label">Plans: </label>
               <div class="controls">
                 <select name="plan" required="required" id="select">
-                  <option value="1" selected="selected">One Month</option>
-                  <option value="3">Three Month</option>
-                  <option value="6">Six Month</option>
-                  <option value="12">One Year</option>
+                  <option value="30" selected="selected">One Month</option>
+                  <option value="90">Three Month</option>
+                  <option value="180">Six Month</option>
+                  <option value="365">One Year</option>
 
                 </select>
               </div>
@@ -138,7 +132,7 @@ header('location:../index.php');
     
     <div class="span6">
       <div class="widget-box">
-        <div class="widget-title"> <span class="icon"> <i class="fas fa-align-justify"></i> </span>
+        <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
           <h5>Contact Details</h5>
         </div>
         <div class="widget-content nopadding">
@@ -146,8 +140,8 @@ header('location:../index.php');
             <div class="control-group">
               <label for="normal" class="control-label">Contact Number</label>
               <div class="controls">
-                <input type="number" id="mask-phone" name="contact" placeholder="9876543210" class="span8 mask text">
-                <span class="help-block blue span8">(+91) 99999 99999</span> 
+                <input type="number" id="mask-phone" name="contact" class="span8 mask text">
+                <span class="help-block blue span8">(999) 999-9999</span> 
                 </div>
             </div>
             <div class="control-group">
@@ -158,7 +152,7 @@ header('location:../index.php');
             </div>
           </div>
 
-              <div class="widget-title"> <span class="icon"> <i class="fas fa-align-justify"></i> </span>
+              <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
           <h5>Service Details</h5>
         </div>
         <div class="widget-content nopadding">
@@ -170,13 +164,13 @@ header('location:../index.php');
               <div class="controls">
                 <label>
                   <input type="radio" value="Fitness" name="services" />
-                  Fitness <small>- ₹1000 per month</small></label>
+                  Fitness</label>
                 <label>
                   <input type="radio" value="Sauna" name="services" />
-                  Sauna <small>- ₹1500 per month</small></label>
+                  Sauna</label>
                 <label>
                   <input type="radio" value="Cardio" name="services" />
-                  Cardio <small>- ₹800 per month</small></label>
+                  Cardio</label>
               </div>
             </div>
 
@@ -185,7 +179,7 @@ header('location:../index.php');
               <div class="controls">
                 <div class="input-append">
                   <span class="add-on">₹</span> 
-                  <input type="number" placeholder="1000" name="amount" class="span11">
+                  <input type="number" placeholder="500" name="amount" class="span11">
                   </div>
               </div>
             </div>
@@ -216,11 +210,10 @@ header('location:../index.php');
 <!--end-main-container-part-->
 
 <!--Footer-part-->
+
 <div class="row-fluid">
   <div id="footer" class="span12"> <?php echo date("Y");?> &copy; Project by Rohit Pokharkar</a> </div>
 </div>
-
-
 
 <style>
 #footer {
